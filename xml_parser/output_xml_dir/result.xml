@@ -1,14 +1,14 @@
 <data>
     <Lusine>
-        <min>50</max>
-        <max>60</max>
+        <min>70</min>
+        <max>90</max>
     </Lusine>
     <Anna>
-        <min>30</min>
-        <max>1000</max>
+        <min>40</min>
+        <max>2011</max>
     </Anna>
     <Aram>
-        <min>20</min>
-        <max>20110</max>
+        <min>68</min>
+        <max>2011</max>
     </Aram>
 </data>
