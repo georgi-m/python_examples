@@ -10,13 +10,12 @@ def filter_except(listdir):
     except_value = util.config.get("xml_parser", "except")
     except_list = except_value.split( )
     util.logger.debug(except_list)
-    for f in listdir:
-        for e in except_list:
-            if e in listdir:
-                try:
-                    listdir.remove(e)
-                except:
-                    pass
+    for e in except_list:
+        if e in listdir:
+            try:
+                listdir.remove(e)
+            except:
+                pass
     util.logger.debug(listdir)
     return listdir
 
@@ -24,7 +23,6 @@ def filter_except(listdir):
 def get_xml_files(d):
     xmls = []
     filtered_list = filter_except(os.listdir(d))
-    #for file in os.listdir(d):
     for file in filtered_list:
         if file.endswith(".xml"):
             xmls.append(os.path.join(d, file))
@@ -69,4 +67,5 @@ def main():
     minimum = get_min_element_from_xmls(xmls_list, name)
     push_result_into_xml(result_xml, minimum, name)
 
-main()
+if __name__ == "__main__":
+    main()
