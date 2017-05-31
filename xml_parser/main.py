@@ -5,10 +5,27 @@ import xml.etree.ElementTree as ET
 import os
 from xml.etree import ElementTree
 
+### Removing excepted element from the list.
+def filter_except(listdir):
+    except_value = util.config.get("xml_parser", "except")
+    except_list = except_value.split( )
+    util.logger.debug(except_list)
+    for f in listdir:
+        for e in except_list:
+            if e in listdir:
+                try:
+                    listdir.remove(e)
+                except:
+                    pass
+    util.logger.debug(listdir)
+    return listdir
+
 ### Getting xml files. 
 def get_xml_files(d):
     xmls = []
-    for file in os.listdir(d):
+    filtered_list = filter_except(os.listdir(d))
+    #for file in os.listdir(d):
+    for file in filtered_list:
         if file.endswith(".xml"):
             xmls.append(os.path.join(d, file))
             util.logger.debug(os.path.join(d, file))
@@ -43,6 +60,8 @@ def push_result_into_xml(result_xml, minimum, name):
 ### Main function.
 def main():
     input_dir = util.config.get("xml_parser", "input_dir")
+    #filter_except(os.listdir(input_dir))
+    #return 0
     xmls_list = get_xml_files(input_dir)
     out_dir = util.config.get("xml_parser", "output_dir")
     result_xml = get_xml_files(out_dir)
